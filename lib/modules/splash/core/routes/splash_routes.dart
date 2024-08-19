@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 final class SplashRoutes {
   static List<GoRoute> get routes => [
         GoRoute(
+          name: AppNamedRoutes.splash,
           path: AppNamedRoutes.splash,
           builder: (BuildContext context, GoRouterState state) =>
               BlocProvider<SplashCubit>(

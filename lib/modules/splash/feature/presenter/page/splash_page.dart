@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  const  SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -31,6 +31,7 @@ class _SplashPageState extends State<SplashPage> {
             debugPrint(state.message);
           }
           if (state is SplashSuccess) {
+            print("indo para Home");
             context.go(AppNamedRoutes.home);
           }
         },
