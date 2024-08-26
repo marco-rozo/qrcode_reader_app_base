@@ -1,7 +1,9 @@
+import 'package:code_bar_reader_base/core/routes/app_named_routes.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_button.dart/custom_button.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_snackbar/custom_snackbar.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ComponentsPage extends StatefulWidget {
   const ComponentsPage({super.key});
@@ -46,7 +48,14 @@ class _ComponentsPageState extends State<ComponentsPage> with CustomSnackBar {
               hintText: 'hint text',
               onChanged: (value) {},
               textEditingController: TextEditingController(),
-            )
+            ),
+            _sizedBox,
+            const Text('Scanner test'),
+            _sizedBox,
+            CustomButton.primary(
+              text: 'Go to scanner',
+              onPressed: () => context.pushNamed(AppNamedRoutes.scanner),
+            ),
           ],
         ),
       ),

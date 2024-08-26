@@ -14,12 +14,9 @@ class HomeBodyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 40,
-            child: CustomButton.primary(
-              text: 'Scan QR Code',
-              onPressed: () => context.goNamed(AppNamedRoutes.components),
-            ),
+          CustomButton.primary(
+            text: 'Show Components',
+            onPressed: () => context.pushNamed(AppNamedRoutes.components),
           ),
         ],
       ),

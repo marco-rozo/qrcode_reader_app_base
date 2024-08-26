@@ -1,0 +1,52 @@
+import 'package:code_bar_reader_base/core/theme/components/custom_generic_loading.dart/custom_generic_loading_widget.dart';
+import 'package:code_bar_reader_base/modules/scanner/feature/presenter/cubit/scanner_cubit.dart';
+import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/scanner_body/scanner_body_widget.dart';
+import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/scanner_camera_error/scanner_camera_error_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class ScannerPage extends StatefulWidget {
+  const ScannerPage({super.key});
+
+  @override
+  State<ScannerPage> createState() => _ScannerPageState();
+}
+
+class _ScannerPageState extends State<ScannerPage> {
+  late final ScannerCubit _qrScannerCubit;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+
+  @override
+  void initState() {
+    super.initState();
+    _qrScannerCubit = context.read<ScannerCubit>()..init();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocConsumer<ScannerCubit, ScannerState>(
+        bloc: _qrScannerCubit,
+        listener: (context, state) {
+          if (state is ScannerError) {
+            debugPrint(state.message);
+          }
+        },
+        builder: (_, state) => switch (state) {
+          ScannerSuccess() => ScannerBodyWidget(
+            qrKey: qrKey,
+            setQRViewController: _qrScannerCubit.setQRViewController,
+            toggleFlash: _qrScannerCubit.changeFlashMode,
+          ),
+          ScannerInitial() ||
+          ScannerLoading() =>
+            const CustomGenericLoadingWidget(),
+          ScannerError() => const Center(
+              child: Text('Error: Camera'),
+            ),
+          ScannerPermissionDeniedState() => const ScannerCameraErrorWidget(),
+        },
+      ),
+    );
+  }
+}

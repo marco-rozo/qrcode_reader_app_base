@@ -1,3 +1,4 @@
+import 'package:code_bar_reader_base/core/theme/components/custom_generic_loading.dart/custom_generic_loading_widget.dart';
 import 'package:code_bar_reader_base/modules/home/feature/presenter/cubit/home_cubit.dart';
 import 'package:code_bar_reader_base/modules/home/feature/presenter/widget/home_body/home_body_widget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         },
         builder: (_, state) => switch (state) {
           HomeInitial() || HomeLoading() => const Center(
-              child: CircularProgressIndicator(),
+              child: CustomGenericLoadingWidget(),
             ),
           HomeSuccess() => const HomeBodyWidget(),
           HomeError _ => Center(
