@@ -1,4 +1,5 @@
 import 'package:code_bar_reader_base/modules/home/feature/presenter/cubit/home_cubit.dart';
+import 'package:code_bar_reader_base/modules/home/feature/presenter/widget/home_body/home_body_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,9 +36,7 @@ class _HomePageState extends State<HomePage> {
           HomeInitial() || HomeLoading() => const Center(
               child: CircularProgressIndicator(),
             ),
-          HomeSuccess() => const Center(
-              child: Text('Success'),
-            ),
+          HomeSuccess() => const HomeBodyWidget(),
           HomeError _ => Center(
               child: Text(state.message),
             ),

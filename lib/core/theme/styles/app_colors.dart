@@ -34,5 +34,5 @@ final class AppColors {
   static const Color positive = Color(0xFF05944F);
   static const Color positiveSecondary = Color(0xFF07BA63);
   static const Color warning = Color(0xFFD2761B);
-
+  static const Color disabled = Color(0xFFD9D9D9);
 }

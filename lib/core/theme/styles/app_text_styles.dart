@@ -38,4 +38,47 @@ final class AppTextStyle {
     fontWeight: FontWeight.w400,
     color: AppColors.textLightSecondary,
   );
+
+  static const TextStyle body14Primary = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textLightPrimary,
+    height: 1.75,
+  );
+
+  static const TextStyle body14Secondary = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textLightSecondary,
+  );
+
+  static const TextStyle primaryButtonText = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textDarkPrimary,
+  );
+
+  static const TextStyle secondaryButtonText = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textLightPrimary,
+  );
+
+  static const TextStyle disabledButtonText = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textLightSecondary,
+  );
+
+  static const TextStyle textButton = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textLightTertiary,
+  );
 }
