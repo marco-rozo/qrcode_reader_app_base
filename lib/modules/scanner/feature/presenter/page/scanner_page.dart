@@ -13,20 +13,20 @@ class ScannerPage extends StatefulWidget {
 }
 
 class _ScannerPageState extends State<ScannerPage> {
-  late final ScannerCubit _qrScannerCubit;
+  late final ScannerCubit _scannerCubit;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
   @override
   void initState() {
     super.initState();
-    _qrScannerCubit = context.read<ScannerCubit>()..init();
+    _scannerCubit = context.read<ScannerCubit>()..init();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<ScannerCubit, ScannerState>(
-        bloc: _qrScannerCubit,
+        bloc: _scannerCubit,
         listener: (context, state) {
           if (state is ScannerError) {
             debugPrint(state.message);
@@ -35,8 +35,8 @@ class _ScannerPageState extends State<ScannerPage> {
         builder: (_, state) => switch (state) {
           ScannerSuccess() => ScannerBodyWidget(
             qrKey: qrKey,
-            setQRViewController: _qrScannerCubit.setQRViewController,
-            toggleFlash: _qrScannerCubit.changeFlashMode,
+            setQRViewController: _scannerCubit.setQRViewController,
+            toggleFlash: _scannerCubit.changeFlashMode,
           ),
           ScannerInitial() ||
           ScannerLoading() =>
