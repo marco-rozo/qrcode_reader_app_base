@@ -1,4 +1,4 @@
-package dev.marcorozo.code_bar_reader_base
+package dev.marcorozo.ticket_code_reader
 
 import io.flutter.embedding.android.FlutterActivity
 
