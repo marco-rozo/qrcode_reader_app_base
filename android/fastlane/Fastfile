@@ -1,0 +1,49 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Upload a new version to a Google Drive folder"
+  lane :upload_to_drive do
+    artifact_path = get_artifact_path(file_type: "apk")
+    upload_to_google_drive(
+      drive_keyfile: '',
+      service_account: true,
+      folder_id: '',
+      upload_files: [artifact_path]
+    )
+  end
+
+  private_lane :get_artifact_path do |options|
+    file_type = options[:file_type]
+    folder_name = "../build/app/outputs/"
+
+    if file_type == "apk"
+      folder_name = folder_name + "apk/release/"
+    else
+      folder_name = folder_name + "bundle/Release/"
+    end
+
+    file_name = "app-release.#{file_type}"
+
+    folder_name + file_name
+  end
+end

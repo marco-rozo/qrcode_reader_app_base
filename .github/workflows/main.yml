@@ -1,0 +1,62 @@
+# Note: In a yml each level is padded by 2 spaces
+name: Flutter
+
+on:
+  # Runs this action when you push on master
+  push:
+    branches: ["main"]
+    # Runs this when a PR against master is created
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  flutter_job:
+    # The machine, we can also use windows-latest or ubuntu-latest
+    # We are choosing macos-latest because we will be also building for iOS
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clones the project on the machine
+      - uses: actions/checkout@v4
+
+      # Installs flutter and related dependency on this machine
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          # flutter-version: '3.16.8'
+          # ^ If you want to use a specific version of flutter
+
+      # Fetches proj dependencies from pub
+      - name: Install dependencies
+        run: flutter pub get
+
+      #   # Verifies if the dart code is formatted well
+      #   - name: Verify formatting
+      #     run: dart format --output=none --set-exit-if-changed .
+      #     # --set-exit-if-changed stops execution if the code isn´t well formatted
+      #     # --output=none prints files which needs to be formatted
+
+      #   # Checks for Symantic errors. Can be configured using analysis_options.yaml
+      #   - name: Analyze project source
+      #     run: flutter analyze
+      #     # optionally use --fatal-warnings to stop execution if warnings found
+
+      # Runs unit test
+      - name: Run tests
+        run: flutter test
+
+      # Create android apk
+      - name: Build apk
+        run: flutter build apk --release
+
+      # Install Fastlane to run fastfile
+      - name: Install Fastlane
+        run: sudo gem install fastlane -NV
+
+      # Upload to Google Drive
+      - name: Upload to Google Drive
+        run: fastlane android upload_to_drive
+        env:
+          PLAY_STORE_CREDENTIALS_FILE_PATH: ${{ secrets.PLAY_STORE_CREDENTIALS_FILE_PATH }}
+          GOOGLE_DRIVE_ACCEPTANCE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_ACCEPTANCE_FOLDER_ID }}
