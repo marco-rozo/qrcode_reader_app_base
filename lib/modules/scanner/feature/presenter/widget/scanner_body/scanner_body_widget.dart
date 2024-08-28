@@ -4,7 +4,7 @@ import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/fl
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class ScannerBodyWidget extends StatelessWidget {
+class ScannerBodyWidget extends StatefulWidget {
   final Function(QRViewController) setQRViewController;
   final VoidCallback toggleFlash;
   final Key qrKey;
@@ -17,12 +17,18 @@ class ScannerBodyWidget extends StatelessWidget {
   });
 
   @override
+  State<ScannerBodyWidget> createState() => _ScannerBodyWidgetState();
+}
+
+class _ScannerBodyWidgetState extends State<ScannerBodyWidget> {
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         QRView(
-          key: qrKey,
-          onQRViewCreated: setQRViewController,
+          key: widget.qrKey,
+          cameraFacing: CameraFacing.back,
+          onQRViewCreated: widget.setQRViewController,
           overlay: QrScannerOverlayShape(
             borderColor: AppColors.primary,
             borderRadius: 10,
@@ -33,7 +39,7 @@ class ScannerBodyWidget extends StatelessWidget {
         ),
         const CloseIconButtonWidget(),
         FlashIconButtonWidget(
-          changeFlashMode: toggleFlash,
+          changeFlashMode: widget.toggleFlash,
         ),
       ],
     );

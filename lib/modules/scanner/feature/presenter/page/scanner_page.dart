@@ -4,6 +4,7 @@ import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/sc
 import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/scanner_camera_error/scanner_camera_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ScannerPage extends StatefulWidget {
   const ScannerPage({super.key});
@@ -28,23 +29,24 @@ class _ScannerPageState extends State<ScannerPage> {
       body: BlocConsumer<ScannerCubit, ScannerState>(
         bloc: _scannerCubit,
         listener: (context, state) {
+          if (state is ScannedSucess) {
+            context.pop();
+          }
           if (state is ScannerError) {
-            debugPrint(state.message);
+            debugPrint('Error: ${state.message}');
           }
         },
         builder: (_, state) => switch (state) {
           ScannerSuccess() => ScannerBodyWidget(
-            qrKey: qrKey,
-            setQRViewController: _scannerCubit.setQRViewController,
-            toggleFlash: _scannerCubit.changeFlashMode,
-          ),
-          ScannerInitial() ||
-          ScannerLoading() =>
-            const CustomGenericLoadingWidget(),
-          ScannerError() => const Center(
-              child: Text('Error: Camera'),
+              qrKey: qrKey,
+              setQRViewController: _scannerCubit.setQRViewController,
+              toggleFlash: _scannerCubit.changeFlashMode,
             ),
           ScannerPermissionDeniedState() => const ScannerCameraErrorWidget(),
+          ScannerInitial() ||
+          ScannerLoading() ||
+          _ =>
+            const CustomGenericLoadingWidget(),
         },
       ),
     );

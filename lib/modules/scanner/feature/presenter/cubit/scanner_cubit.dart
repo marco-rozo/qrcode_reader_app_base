@@ -1,6 +1,7 @@
 import 'package:code_bar_reader_base/core/externals/permission_manager/enums/permission_manager_status_enum.dart';
 import 'package:code_bar_reader_base/core/externals/permission_manager/permission_manager.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -38,17 +39,19 @@ class ScannerCubit extends Cubit<ScannerState> {
     }
   }
 
-  void setQRViewController(QRViewController controller) {
+  Future<void> setQRViewController(QRViewController controller) async {
     _qrController = controller;
-    _qrController.scannedDataStream.listen((scanData) {
-      processQRCode(scanData);
+    _qrController.scannedDataStream.listen((scanData) async {
+      await controller.pauseCamera();
+      _processQRCode(scanData);
     });
   }
 
-  void processQRCode(Barcode scanData) {
+  void _processQRCode(Barcode scanData) {
     try {
       // TODO implementar a lógica necessária para processar o QR Code
-      print('QR Code Scanned: ${scanData.code}');
+      debugPrint('QR Code Scanned: ${scanData.code}');
+      emit(ScannedSucess());
     } catch (error) {
       emit(ScannerError(message: error.toString()));
     }

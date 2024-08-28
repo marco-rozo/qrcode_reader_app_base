@@ -17,6 +17,8 @@ final class ScannerError extends ScannerState {
   ScannerError({required this.message});
 }
 
+final class ScannedSucess extends ScannerState {}
+
 final class ScannerPermissionDeniedState extends ScannerState {
   final String message;
 
