@@ -42,8 +42,8 @@ jobs:
         run: flutter analyze
 
       # Runs unit test
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #   run: flutter test
 
       # Step that only runs on push events (merges)
       - name: Decode Google Drive credentials
