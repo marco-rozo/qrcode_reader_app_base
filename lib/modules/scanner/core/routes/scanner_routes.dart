@@ -1,5 +1,6 @@
 import 'package:code_bar_reader_base/core/externals/permission_manager/permission_manager.dart';
 import 'package:code_bar_reader_base/core/routes/app_named_routes.dart';
+import 'package:code_bar_reader_base/modules/scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
 import 'package:code_bar_reader_base/modules/scanner/feature/presenter/cubit/scanner_cubit.dart';
 import 'package:code_bar_reader_base/modules/scanner/feature/presenter/page/scanner_page.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ final class ScannerRoutes {
               BlocProvider<ScannerCubit>(
             create: (context) => ScannerCubit(
               permissionManager: context.read<PermissionManager>(),
+              getTicketByCodeUsecase: context.read<GetTicketByCodeUsecase>(),
             ),
             child: const ScannerPage(),
           ),
