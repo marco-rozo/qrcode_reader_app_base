@@ -7,12 +7,9 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   Future<void> init() async {
-    print("iniciando a Home");
-
     emit(HomeLoading());
 
-    await Future.delayed(Duration(seconds: 2));
-    print("carregou a Home");
+    await Future.delayed(const Duration(seconds: 2));
 
     emit(HomeSuccess());
   }

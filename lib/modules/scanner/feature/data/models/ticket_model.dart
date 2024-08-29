@@ -8,7 +8,6 @@ class TicketModel extends TicketEntity {
   });
 
   factory TicketModel.fromMap(Map<String, dynamic> json) {
-    print(json);
     return TicketModel(
       code: json['code'],
       id: json['id'],
