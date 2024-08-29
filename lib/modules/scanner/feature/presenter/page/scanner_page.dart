@@ -34,6 +34,7 @@ class _ScannerPageState extends State<ScannerPage> {
           }
           if (state is ScannerError) {
             debugPrint('Error: ${state.message}');
+            _scannerCubit.init();
           }
         },
         builder: (_, state) => switch (state) {
