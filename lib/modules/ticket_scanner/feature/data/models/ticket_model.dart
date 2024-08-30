@@ -15,7 +15,7 @@ class TicketModel extends TicketEntity {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'code': code,
       'id': id,

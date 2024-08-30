@@ -1,5 +1,5 @@
 import 'package:code_bar_reader_base/core/errors/failures.dart';
-import 'package:code_bar_reader_base/modules/ticket_scanner/core/errors/ticket_not_found_failure.dart';
+import 'package:code_bar_reader_base/core/errors/failures/unknown_failure.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/datasources/get_ticket_by_code_datasource.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/entities/ticket_entity.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/repositories/get_ticket_by_code_repository.dart';
@@ -14,9 +14,12 @@ class GetTicketByCodeRepositoryImpl implements GetTicketByCodeRepository {
   @override
   Future<Either<Failure, TicketEntity>> call({required String code}) async {
     try {
-      return Right(await _getTicketByCodeDatasource(code: code));
+      final result = await _getTicketByCodeDatasource(code: code);
+      return Right(result);
+    } on Failure catch (failure) {
+      return Left(failure);
     } catch (e) {
-      return Left(TicketNotFoundFailure());
+      return Left(UnknownFailure());
     }
   }
 }
