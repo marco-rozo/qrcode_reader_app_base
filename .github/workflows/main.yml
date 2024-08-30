@@ -50,9 +50,9 @@ jobs:
         if: github.event_name == 'push'
         run: echo ${{secrets.ANDROID_SIGNINSERVICE_ACCOUNT_GOOGLE_CREDENTIALSG_KEY}} | base64 -d > ./android/fastlane/drive_key.json
 
-      # - name: Build APK
-      #   if: github.event_name == 'push'
-      #   run: flutter build apk --release
+      - name: Build APK
+        if: github.event_name == 'push'
+        run: flutter build apk --release
 
       - name: Install Fastlane
         if: github.event_name == 'push'
