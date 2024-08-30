@@ -1,63 +1,60 @@
-# Note: In a yml each level is padded by 2 spaces
 name: Flutter
 
 on:
-  # Runs this action when you push on master
+  # Executa essa ação quando houver um push na branch "main"
   push:
     branches: ["main"]
-    # Runs this when a PR against master is created
+  # Executa essa ação quando um pull request for criado para a branch "main"
   pull_request:
     branches: ["main"]
 
 jobs:
   flutter_job:
-    # The machine, we can also use windows-latest or ubuntu-latest
-    # We are choosing macos-latest because we will be also building for iOS
+    # Define o ambiente da máquina virtual onde o job será executado
+    # Pode-se usar windows-latest ou ubuntu-latest
+    # Neste caso, escolhemos ubuntu-latest
     runs-on: ubuntu-latest
 
     steps:
-      # Clones the project on the machine
+      # Passo 1: Clona o repositório do projeto na máquina virtual
       - uses: actions/checkout@v4
 
-      # Installs flutter and related dependency on this machine
-      - name: Setup Flutter
+      # Passo 2: Instala o Flutter e as dependências relacionadas nesta máquina
+      - name: Configurar Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
           # flutter-version: '3.16.8'
-          # ^ If you want to use a specific version of flutter
+          # ^ Caso queira usar uma versão específica do Flutter, descomente a linha acima e defina a versão
 
-      # Fetches proj dependencies from pub
-      - name: Install dependencies
+      # Passo 3: Instala as dependências do projeto através do pub
+      - name: Instalar dependências
         run: flutter pub get
 
-      #   # Verifies if the dart code is formatted well
-      #   - name: Verify formatting
-      #     run: dart format --output=none --set-exit-if-changed .
-      #     # --set-exit-if-changed stops execution if the code isn´t well formatted
-      #     # --output=none prints files which needs to be formatted
-
-      #   # Checks for Symantic errors. Can be configured using analysis_options.yaml
-      # - name: Analyze project source
+      # Passo 4: Verifica por erros semânticos no código (opcional)
+      # - name: Analisar o código do projeto
       #   run: flutter analyze
 
-      # Runs unit test
-      # - name: Run tests
-      #   run: flutter test
-      # Step that only runs on push events (merges)
+      # Passo 5: Executa os testes unitários
+      - name: Run tests
+        run: flutter test
+
+      # Passo 6: Decodifica as credenciais do Google Drive (somente para eventos de push)
       - name: Decode Google Drive credentials
         if: github.event_name == 'push'
         run: echo "${{secrets.SERVICE_ACCOUNT_GOOGLE_CREDENTIALS}}" | base64 -d > /home/runner/drive_key.json
 
+      # Passo 7: Cria o APK do aplicativo (somente para eventos de push)
       - name: Build APK
         if: github.event_name == 'push'
         run: flutter build apk --release
 
+      # Passo 8: Instala o Fastlane (somente para eventos de push)
       - name: Install Fastlane
         if: github.event_name == 'push'
         run: sudo gem install fastlane -NV
 
-      # Step 5 Install the bundler & Fastlane (Create environment for ruby to avoid dependency hell and manage the dependencies versions)
+      # Passo 9: Instala o Bundler e configura o ambiente Ruby (evita problemas de dependências)
       - name: Install bundler
         working-directory: ./android
         run: |
@@ -65,11 +62,13 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
+      # Passo 10: Instala os plugins necessários do Fastlane (somente para eventos de push)
       - name: Install Fastlane Plugins
         if: github.event_name == 'push'
         working-directory: ./android
         run: bundle exec fastlane install_plugins
 
+      # Passo 11: Realiza o upload do APK para o Google Drive (somente para eventos de push)
       - name: Upload to Google Drive
         if: github.event_name == 'push'
         working-directory: ./android
