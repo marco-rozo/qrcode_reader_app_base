@@ -59,14 +59,18 @@ jobs:
         if: github.event_name == 'push'
         run: sudo gem install fastlane -NV
 
+      # Step 5 Install the bundler
+      - name: Install bundler
+        run: sudo gem install bundler
+
       - name: Install Fastlane Plugins
         if: github.event_name == 'push'
-        run: |
-          cd android
-          bundle exec fastlane install_plugins
+        working-directory: ./android
+        run: bundle exec fastlane install_plugins
 
       - name: Upload to Google Drive
         if: github.event_name == 'push'
+        working-directory: ./android
         run: bundle exec fastlane android upload_to_drive
         env:
           SERVICE_ACCOUNT_GOOGLE_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_GOOGLE_CREDENTIALS }}
