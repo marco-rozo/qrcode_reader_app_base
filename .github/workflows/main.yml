@@ -70,7 +70,7 @@ jobs:
       - name: Install Fastlane Plugins
         if: github.event_name == 'push'
         working-directory: ./android
-        run: fastlane add_plugin google_drive
+        run: bundle exec fastlane install_plugins
 
       - name: Upload to Google Drive
         if: github.event_name == 'push'
