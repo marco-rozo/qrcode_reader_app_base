@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:code_bar_reader_base/core/externals/permission_manager/permission_manager.dart';
 import 'package:code_bar_reader_base/core/externals/permission_manager/permission_manager_impl.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/data/datasources/get_ticket_by_code_datasource.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/data/datasources/get_ticket_by_code_datasource_impl.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/data/repositories/get_ticket_by_code_repository_impl.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/repositories/get_ticket_by_code_repository.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/usecases/get_ticket_by_code_usecase_impl.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/datasources/get_ticket_by_code_datasource.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/datasources/get_ticket_by_code_datasource_impl.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/repositories/get_ticket_by_code_repository_impl.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/repositories/get_ticket_by_code_repository.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/usecases/get_ticket_by_code_usecase_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final class ScannerInjection {
+final class TicketScannerInjection {
   static List<RepositoryProvider> get repositoryProvider => [
         RepositoryProvider<GetTicketByCodeDatasource>(
           create: (context) => GetTicketByCodeDatasourceImpl(

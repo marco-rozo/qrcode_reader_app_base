@@ -54,7 +54,7 @@ class _ComponentsPageState extends State<ComponentsPage> with CustomSnackBar {
             _sizedBox,
             CustomButton.primary(
               text: 'Go to scanner',
-              onPressed: () => context.pushNamed(AppNamedRoutes.scanner),
+              onPressed: () => context.pushNamed(AppNamedRoutes.ticketScanner),
             ),
           ],
         ),

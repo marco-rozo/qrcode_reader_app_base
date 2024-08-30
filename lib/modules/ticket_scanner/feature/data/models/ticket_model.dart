@@ -1,4 +1,4 @@
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/entities/ticket_entity.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/entities/ticket_entity.dart';
 
 class TicketModel extends TicketEntity {
   TicketModel({

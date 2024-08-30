@@ -1,7 +1,7 @@
 import 'package:code_bar_reader_base/core/errors/failures.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/entities/ticket_entity.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/repositories/get_ticket_by_code_repository.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/entities/ticket_entity.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/repositories/get_ticket_by_code_repository.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
 import 'package:dartz/dartz.dart';
 
 class GetTicketByCodeUsecaseImpl implements GetTicketByCodeUsecase {

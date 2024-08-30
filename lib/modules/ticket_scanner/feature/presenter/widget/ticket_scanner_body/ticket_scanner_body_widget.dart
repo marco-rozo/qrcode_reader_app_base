@@ -1,15 +1,15 @@
 import 'package:code_bar_reader_base/core/theme/styles/app_colors.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/close_icon_button/close_icon_button_widget.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/presenter/widget/flash_icon_button/flash_icon_button_widget.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/presenter/widget/close_icon_button/close_icon_button_widget.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/presenter/widget/flash_icon_button/flash_icon_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class ScannerBodyWidget extends StatefulWidget {
+class TicketScannerBodyWidget extends StatefulWidget {
   final Function(QRViewController) setQRViewController;
   final VoidCallback toggleFlash;
   final Key qrKey;
 
-  const ScannerBodyWidget({
+  const TicketScannerBodyWidget({
     super.key,
     required this.setQRViewController,
     required this.qrKey,
@@ -17,10 +17,10 @@ class ScannerBodyWidget extends StatefulWidget {
   });
 
   @override
-  State<ScannerBodyWidget> createState() => _ScannerBodyWidgetState();
+  State<TicketScannerBodyWidget> createState() => _TicketScannerBodyWidgetState();
 }
 
-class _ScannerBodyWidgetState extends State<ScannerBodyWidget> {
+class _TicketScannerBodyWidgetState extends State<TicketScannerBodyWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(

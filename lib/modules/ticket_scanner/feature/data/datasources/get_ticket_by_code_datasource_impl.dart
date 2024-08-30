@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:code_bar_reader_base/modules/scanner/core/consts/ticket_consts.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/data/datasources/get_ticket_by_code_datasource.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/data/models/ticket_model.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/core/consts/ticket_consts.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/datasources/get_ticket_by_code_datasource.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/data/models/ticket_model.dart';
 
 class GetTicketByCodeDatasourceImpl implements GetTicketByCodeDatasource {
   final FirebaseFirestore _firebaseFirestore;

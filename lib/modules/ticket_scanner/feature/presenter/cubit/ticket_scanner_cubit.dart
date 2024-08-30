@@ -1,28 +1,28 @@
 import 'package:code_bar_reader_base/core/externals/permission_manager/enums/permission_manager_status_enum.dart';
 import 'package:code_bar_reader_base/core/externals/permission_manager/permission_manager.dart';
-import 'package:code_bar_reader_base/modules/scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
+import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/usecases/get_ticket_by_code_usecase.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-part 'scanner_state.dart';
+part 'ticket_scanner_state.dart';
 
-class ScannerCubit extends Cubit<ScannerState> {
+class TicketScannerCubit extends Cubit<TicketScannerState> {
   final GetTicketByCodeUsecase _getTicketByCodeUsecase;
   final PermissionManager _permissionManager;
 
-  ScannerCubit({
+  TicketScannerCubit({
     required PermissionManager permissionManager,
     required GetTicketByCodeUsecase getTicketByCodeUsecase,
   })  : _permissionManager = permissionManager,
         _getTicketByCodeUsecase = getTicketByCodeUsecase,
-        super(ScannerInitial());
+        super(TicketScannerInitial());
 
   late QRViewController _qrController;
 
   Future<void> init() async {
-    emit(ScannerLoading());
+    emit(TicketScannerLoading());
     await Future.delayed(const Duration(seconds: 2));
     _checkCameraPermission();
   }
@@ -39,7 +39,7 @@ class ScannerCubit extends Cubit<ScannerState> {
     }
 
     if (status == PermissionManagerStatusEnum.granted) {
-      emit(ScannerSuccess());
+      emit(TicketScannerSuccess());
     }
   }
 
@@ -58,17 +58,17 @@ class ScannerCubit extends Cubit<ScannerState> {
         final result = await _getTicketByCodeUsecase(code: scanData.code!);
         result.fold(
           (error) {
-            emit(ScannerError(message: 'Ticket not found'));
+            emit(TicketScannerError(message: 'Ticket not found'));
           },
           (ticket) {
-            emit(ScannedSucess());
+            emit(TicketScannedSucess());
           },
         );
       } else {
-        emit(ScannerError(message: 'Invalid QR Code'));
+        emit(TicketScannerError(message: 'Invalid QR Code'));
       }
     } catch (error) {
-      emit(ScannerError(message: error.toString()));
+      emit(TicketScannerError(message: error.toString()));
     }
   }
 
