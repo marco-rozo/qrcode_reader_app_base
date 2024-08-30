@@ -28,7 +28,7 @@ platform :android do
 
     artifact_path = get_artifact_path(file_type: "apk")
     upload_to_google_drive(
-      drive_keyfile: 'fastlane/drive_key.json',
+      drive_keyfile: 'drive_key.json',
       service_account: true,
       folder_id: folder_id,
       upload_files: [artifact_path]
