@@ -61,6 +61,7 @@ jobs:
 
       # Step 5 Install the bundler & Fastlane (Create environment for ruby to avoid dependency hell and manage the dependencies versions)
       - name: Install bundler
+        working-directory: ./android
         run: |
           sudo gem install bundler
           bundle config path vendor/bundle
@@ -69,7 +70,7 @@ jobs:
       - name: Install Fastlane Plugins
         if: github.event_name == 'push'
         working-directory: ./android
-        run: bundle exec fastlane install_plugins
+        run: fastlane add_plugin google_drive
 
       - name: Upload to Google Drive
         if: github.event_name == 'push'
