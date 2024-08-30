@@ -24,12 +24,11 @@ platform :android do
   desc "Upload a new version to a Google Drive folder"
   lane :upload_to_drive do
     # Usar variáveis de ambiente para o caminho do arquivo JSON e o ID da pasta do Google Drive
-    drive_keyfile = ENV["SERVICE_ACCOUNT_GOOGLE_CREDENTIALS"]
     folder_id = ENV["GOOGLE_DRIVE_FOLDER_ID"]
 
     artifact_path = get_artifact_path(file_type: "apk")
     upload_to_google_drive(
-      drive_keyfile: drive_keyfile,
+      drive_keyfile: 'fastlane/drive_key.json',
       service_account: true,
       folder_id: folder_id,
       upload_files: [artifact_path]
