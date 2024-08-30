@@ -47,7 +47,7 @@ jobs:
       # Step that only runs on push events (merges)
       - name: Decode Google Drive credentials
         if: github.event_name == 'push'
-        run: echo "${{secrets.SERVICE_ACCOUNT_GOOGLE_CREDENTIALS}}" | base64 -d > drive_key.json
+        run: echo "${{secrets.SERVICE_ACCOUNT_GOOGLE_CREDENTIALS}}" | base64 -d > /home/runner/work/fastlane/drive_key.json
 
       - name: Build APK
         if: github.event_name == 'push'
