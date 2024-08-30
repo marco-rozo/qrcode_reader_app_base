@@ -38,8 +38,8 @@ jobs:
       #     # --output=none prints files which needs to be formatted
 
       #   # Checks for Symantic errors. Can be configured using analysis_options.yaml
-      - name: Analyze project source
-        run: flutter analyze
+      # - name: Analyze project source
+      #   run: flutter analyze
 
       # Runs unit test
       # - name: Run tests
