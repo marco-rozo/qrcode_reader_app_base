@@ -63,11 +63,11 @@ jobs:
         if: github.event_name == 'push'
         run: |
           cd android
-          fastlane install_plugins
+          bundle exec fastlane install_plugins
 
       - name: Upload to Google Drive
         if: github.event_name == 'push'
-        run: fastlane android upload_to_drive
+        run:  bundle exec fastlane android upload_to_drive
         env:
           SERVICE_ACCOUNT_GOOGLE_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_GOOGLE_CREDENTIALS }}
           GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
