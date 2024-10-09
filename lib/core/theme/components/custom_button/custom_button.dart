@@ -1,4 +1,4 @@
-import 'package:code_bar_reader_base/core/theme/components/custom_button.dart/custom_button_type_enum.dart';
+import 'package:code_bar_reader_base/core/theme/components/custom_button/custom_button_type_enum.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_snackbar/custom_snackbar.dart';
 import 'package:code_bar_reader_base/core/theme/styles/app_text_styles.dart';
 import 'package:flutter/material.dart';

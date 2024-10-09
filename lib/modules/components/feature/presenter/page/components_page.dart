@@ -1,5 +1,6 @@
 import 'package:code_bar_reader_base/core/routes/app_named_routes.dart';
-import 'package:code_bar_reader_base/core/theme/components/custom_button.dart/custom_button.dart';
+import 'package:code_bar_reader_base/core/theme/components/custom_bottom_sheet/custom_bottom_sheet.dart';
+import 'package:code_bar_reader_base/core/theme/components/custom_button/custom_button.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_snackbar/custom_snackbar.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_text_form_field/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ class ComponentsPage extends StatefulWidget {
   State<ComponentsPage> createState() => _ComponentsPageState();
 }
 
-class _ComponentsPageState extends State<ComponentsPage> with CustomSnackBar {
+class _ComponentsPageState extends State<ComponentsPage>
+    with CustomSnackBar, CustomBottomSheet {
   final _sizedBox = const SizedBox(height: 8);
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,18 @@ class _ComponentsPageState extends State<ComponentsPage> with CustomSnackBar {
               hintText: 'hint text',
               onChanged: (value) {},
               textEditingController: TextEditingController(),
+            ),
+            _sizedBox,
+            const Text('BottomSheet'),
+            CustomButton.secondary(
+              text: 'show bottom sheet',
+              onPressed: () {
+                showCustomBottomSheet(
+                  context: context,
+                  child: const Text('Bottom Sheet'),
+                  initialChildSize: 1,
+                );
+              },
             ),
             _sizedBox,
             const Text('Scanner test'),

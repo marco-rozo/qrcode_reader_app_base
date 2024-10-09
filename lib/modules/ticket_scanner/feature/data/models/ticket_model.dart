@@ -1,3 +1,4 @@
+import 'package:code_bar_reader_base/modules/ticket_scanner/core/consts/ticket_consts.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/domain/entities/ticket_entity.dart';
 
 class TicketModel extends TicketEntity {
@@ -9,17 +10,17 @@ class TicketModel extends TicketEntity {
 
   factory TicketModel.fromMap(Map<String, dynamic> json) {
     return TicketModel(
-      code: json['code'],
-      id: json['id'],
-      title: json['title'],
+      code: json[TicketConsts.code],
+      id: json[TicketConsts.id],
+      title: json[TicketConsts.title],
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'code': code,
-      'id': id,
-      'title': title,
+      TicketConsts.code: code,
+      TicketConsts.id: id,
+      TicketConsts.title: title,
     };
   }
 

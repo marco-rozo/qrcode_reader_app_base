@@ -15,7 +15,7 @@ class GetTicketByCodeDatasourceImpl implements GetTicketByCodeDatasource {
   Future<TicketModel> call({required String code}) async {
     try {
       return _firebaseFirestore
-          .collection(TickerConsts.collection)
+          .collection(TicketConsts.collection)
           .doc(code)
           .get()
           .then(

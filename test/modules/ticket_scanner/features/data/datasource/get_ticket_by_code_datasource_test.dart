@@ -19,7 +19,7 @@ void main() {
     );
 
     await firebaseFirestore
-        .collection(TickerConsts.collection)
+        .collection(TicketConsts.collection)
         .doc('123')
         .set(ticketMapMock);
   });

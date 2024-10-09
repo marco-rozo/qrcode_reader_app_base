@@ -8,6 +8,7 @@ class SplashCubit extends Cubit<SplashState> {
   final int minSplashTimeInSeconds = 3;
 
   Future<void> init() async {
+    print('inbit');
     emit(SplashLoading());
 
     await Future.delayed(Duration(seconds: minSplashTimeInSeconds));

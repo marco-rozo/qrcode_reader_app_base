@@ -1,3 +1,5 @@
+import 'package:code_bar_reader_base/core/theme/components/custom_bottom_sheet/custom_bottom_sheet.dart';
+import 'package:code_bar_reader_base/core/theme/components/custom_button/custom_button.dart';
 import 'package:code_bar_reader_base/core/theme/components/custom_generic_loading.dart/custom_generic_loading_widget.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/presenter/cubit/ticket_scanner_cubit.dart';
 import 'package:code_bar_reader_base/modules/ticket_scanner/feature/presenter/widget/ticket_scanner_body/ticket_scanner_body_widget.dart';
@@ -13,7 +15,8 @@ class TicketScannerPage extends StatefulWidget {
   State<TicketScannerPage> createState() => _TicketScannerPageState();
 }
 
-class _TicketScannerPageState extends State<TicketScannerPage> {
+class _TicketScannerPageState extends State<TicketScannerPage>
+    with CustomBottomSheet {
   late final TicketScannerCubit _scannerCubit;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -42,6 +45,19 @@ class _TicketScannerPageState extends State<TicketScannerPage> {
               qrKey: qrKey,
               setQRViewController: _scannerCubit.setQRViewController,
               toggleFlash: _scannerCubit.changeFlashMode,
+              openInsertManualCode: () async {
+                _scannerCubit.pauseScanner();
+                final result = await showCustomBottomSheet(
+                  context: context,
+                  child: CustomButton.negative(
+                    text: 'Teste fechando bottom sheet',
+                    onPressed: () => context.pop(false),
+                  ),
+                );
+
+                print(result);
+                _scannerCubit.restartScanner();
+              },
             ),
           ScannerPermissionDeniedState() => const ScannerCameraErrorWidget(),
           TicketScannerInitial() ||

@@ -51,6 +51,14 @@ class TicketScannerCubit extends Cubit<TicketScannerState> {
     });
   }
 
+  Future<void> pauseScanner() async {
+    await _qrController.pauseCamera();
+  }
+
+  Future<void> restartScanner() async {
+    await _qrController.resumeCamera();
+  }
+
   void _processQRCode(Barcode scanData) async {
     try {
       debugPrint('QR Code Scanned: ${scanData.code}');
